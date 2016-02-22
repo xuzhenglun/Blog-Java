@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<script th:fragment="jquery" src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script th:fragment="bootstrap" src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:fragment="LoginStatus">
+    function logout() {
+        var date = new Date();
+        var cookieExpire = date.getTime() - 1000; // 设置为一个过去的时间
+        // 删除 cookie 时，名称、路径和域名必须相同
+        document.cookie = "expire=" + cookieExpire;
+        document.cookie = "PasswdHash=null;";
+        document.cookie = "IsLogin=0;";
+        location.href = "/";
+    }
+    window.onload = function LoginStatus() {
+        var cookie = document.cookie;
+        var index = cookie.indexOf("IsLogin=");
+        if (cookie[index + 8] == "1") {
+            document.getElementById("isLogin").innerHTML = "登出";
+            document.getElementById("isLogin").setAttribute('href', "javascript:void(0);");
+            document.getElementById("isLogin").setAttribute("onclick", "logout()");
+        }
+    }
+</script>
+</html>

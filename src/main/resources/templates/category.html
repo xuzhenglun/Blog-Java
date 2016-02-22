@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragment/header::header"/>
+<body>
+<div th:replace="fragment/body::navbar"/>
+
+<div class="jumbotron masthead">
+    <!--Add new Category-->
+    <div class="container">
+        <h2>主题分类</h2>
+        <form method="POST" action="/category" class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">添加分类</label>
+                <div class="col-lg-9">
+                    <input type="hidden" name="op" value="add"/>
+                    <input class="form-control" id="name" placeholder="Category" name="name"/>
+                </div>
+                <button type="submit" class="btn btn-default col-md-0" onclick="return checkInput();">添加</button>
+            </div>
+        </form>
+        <script type="text/javascript">
+            function checkInput() {
+                var name = document.getElementById("name");
+                if (name.value.length == 0) {
+                    alert("非法分类名");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+
+        <!--Category List-->
+        <table class="table table-striped">
+
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>分类</th>
+                <th>主题数</th>
+            </tr>
+            </thead>
+            <tbody th:each="category:${Categories}">
+            <tr>
+                <th th:text="${category.Id}"></th>
+                <th th:text="${category.Category}"></th>
+                <th th:text="${category.TopicCounts}"></th>
+                <th>
+                    <a th:href="'/category?op=del&amp;id=' + ${category.Id}">Delete</a>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script th:replace="fragment/jslibs::jquery"/>
+<script th:replace="fragment/jslibs::bootstrap"/>
+</body>
+</html>

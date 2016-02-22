@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragment/header :: header"/>
+<body>
+<div th:replace="fragment/body::navbar"></div>
+<div class="jumbotron masthead">
+    <div class="container">
+        <div class="col-md-9">
+
+            <div class="page-header" th:each="topic:${Topics}">
+                <h1>
+                    <li><a th:href="'/topic/view/'+${topic.Id}" th:text="${topic.Title}"></a></li>
+                </h1>
+                <h6 class="test-muted"
+                    th:text="'Created:' + ${topic.Created}+'. Views:' + ${topic.Views}+'. Replies:'+${topic.ReplyCounts}+'.'"></h6>
+                <p th:text="${topic.Content}"></p>
+            </div>
+
+        </div>
+        <h3>Categories</h3>
+        <ul th:each="category:${Categories}">
+            <li><a th:href="'/index?cate='+${category.Category}" th:text="${category.Category}"></a></li>
+        </ul>
+    </div>
+</div>
+
+<script th:replace="fragment/jslibs::jquery"/>
+<script th:replace="fragment/jslibs::bootstrap"/>
+</body>
+</html>

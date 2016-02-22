@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragment/header::header"/>
+<body>
+<div th:replace="fragment/body::navbar"/>
+<div class="jumbotron masthead">
+    <div class="container">
+        <h1 th:inline="text">[[${Mode}]] Topic</h1>
+        <form method="POST" th:action="'/topic/'+${Mode}" enctype="multipart/form-data">
+            <input type="hidden" name="tid" th:value="${topic != null} ? ${topic.Id}"/>
+            <div class="form-group">
+                <label>Topic: </label>
+                <input type="text" name="title" class="form-control" th:value="${topic != null} ? ${topic.Title}"/>
+            </div>
+            <div class="form-group">
+                <label>Category: </label>
+                <input type="text" name="category" class="form-control"
+                       th:value="${topic != null} ? ${topic.Category}"/>
+            </div>
+            <div class="form-group">
+                <label>Tags: </label>
+                <input type="text" name="tags" class="form-control" th:value="${topic != null} ? ${topic.Tag}"/>
+            </div>
+            <div class="form-group">
+                <label>Content: </label>
+                <textarea name="content" cols="30" rows="10" class="form-control"
+                          th:text="${topic != null} ? ${topic.Content}"></textarea>
+            </div>
+            <div class="form-group">
+                <label>
+                    Attachment:
+                    <a th:href="'attachments?name=' + (${topic != null} ? ${topic.Attachment})"
+                       th:text="${topic != null} ? ${topic.Attachment}"/>
+                </label>
+                <input type="file" name="attachment" class="file"/>
+            </div>
+            <button type="submit" class="btn btn-default">Add Topic</button>
+        </form>
+    </div>
+</div>
+
+<script th:replace="fragment/jslibs::jquery"/>
+<script th:replace="fragment/jslibs::bootstrap"/>
+</body>
+</html>

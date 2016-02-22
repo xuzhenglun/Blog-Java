@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragment/header::header"/>
+<body>
+<div th:replace="fragment/body::navbar"/>
+
+<div class="jumbotron masthead">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>主题列表</h2>
+            </div>
+            <div class="col-md-3 col-md-offset-5 row col-sm-9">
+                <table border="0">
+                    <caption></caption>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><a href="/topic/add" class="btn btn-default col-md-offset-3 row-md-offset-1">添加主题</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <script type="text/javascript">
+            function checkInput() {
+                var name = document.getElementById("name");
+                if (name.value.length == 0) {
+                    alert("Invild Category");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>主题</th>
+                <th>最后更新时间</th>
+                <th>浏览数</th>
+                <th>回复数</th>
+                <th>最后回复时间</th>
+                <th>功能</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="topic:${Topics}">
+                <th th:text="${topic.Id}"></th>
+                <th><a th:text="${topic.Title}" th:href="'/topic/view/'+${topic.Id}"/></th>
+                <th th:text="${#dates.format(topic.Updated, 'yyyy-MM-dd hh:mm')}"/>
+                <th th:text="${topic.Views}"/>
+                <th th:text="${topic.ReplyCounts}"/>
+                <th th:text="${topic.LastReply == null}?'-':${#dates.format(topic.LastReply, 'yyyy-MM-dd hh:mm')}"/>
+                <th>
+                    <a th:href="'topic/modify?tid='+${topic.Id}">Modify</a>
+                    <a th:href="'/topic/delete/'+${topic.Id}">Delete</a>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script th:replace="fragment/jslibs::jquery"/>
+<script th:replace="fragment/jslibs::bootstrap"/>
+</body>
+</html>

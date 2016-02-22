@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragment/header::header"/>
+<body>
+<div th:replace="fragment/body::navbar"/>
+<div class="jumbotron masthead">
+    <div class="container">
+
+        <h1 th:inline="text">
+            [[${topic.Title}]]
+            <small th:text="${topic.Category}"></small>
+            <a th:href="'/topic/modify?tid='+${topic.Id}" class="btn btn-default">Modify Topic</a>
+        </h1>
+        <h5>
+            <a th:href="'/?tag='+${topic.Tag}" th:text="${topic.Tag}"></a>
+        </h5>
+        <p th:text="${topic.content}"></p>
+    </div>
+</div>
+<div class="container">
+    <label>
+        Attachment: <a th:href="'attachments?name=' + (${topic != null} ? ${topic.Attachment})"
+                       th:text="${topic != null} ? ${topic.Attachment}"/>
+    </label>
+</div>
+
+<div class="container">
+    <h3>Replies: </h3>
+
+    <div th:each="comment:${Comments}">
+        <h4 th:inline="text">
+            [[${comment.Name}]]
+            <small th:text="${comment.Updated}"/>
+            <a th:href="'/topic/'+ ${topic.Id}+'/reply/'+ ${comment.Id}+ '?op=delete'">Delete</a>
+        </h4>
+        <p th:text="${comment.Content}"/>
+    </div>
+
+    <form method="POST" action="/reply/add">
+        <input type="hidden" name="tid" th:value="${topic.Id}"/>
+        <!--<div class="form-group">-->
+        <!--<label>Nickname: </label>-->
+        <!--<input type="text" class="form-control" name="nickname"/>-->
+        <!--</div>-->
+        <div class="form-group">
+            <label>Content: </label>
+            <textarea name="content" id="" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+        <button class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+<script th:replace="fragment/jslibs::jquery"/>
+<script th:replace="fragment/jslibs::bootstrap"/>
+</body>
+</html>

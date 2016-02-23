@@ -30,7 +30,7 @@
     <div th:each="comment:${Comments}">
         <h4 th:inline="text">
             [[${comment.Name}]]
-            <small th:text="${comment.Updated}"/>
+            <small th:text="${comment.Created}"/>
             <a th:href="'/topic/'+ ${topic.Id}+'/reply/'+ ${comment.Id}+ '?op=delete'">Delete</a>
         </h4>
         <p th:text="${comment.Content}"/>

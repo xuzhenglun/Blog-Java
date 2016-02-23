@@ -10,25 +10,21 @@ public class Topic implements Serializable {
     public long Id;
     public long Uid;
     public String Title;
+    public String Category;
     public String Tag;
     public String Content;
     public String Attachment;
     public Timestamp Created;
     public Timestamp Updated;
     public long Views;
-    public String Author;
     public long ReplyCounts;
     public long ReplyLastUserId;
     public Timestamp LastReply;
-    public String Category;
 
     public void setAttachment(String attachment) {
         Attachment = attachment;
     }
 
-    public void setAuthor(String author) {
-        Author = author;
-    }
 
     public void setCategory(String category) {
         Category = category;
@@ -81,10 +77,6 @@ public class Topic implements Serializable {
     public String getAttachment() {
 
         return Attachment;
-    }
-
-    public String getAuthor() {
-        return Author;
     }
 
     public String getCategory() {

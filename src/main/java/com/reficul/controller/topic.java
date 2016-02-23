@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Timestamp;
 
 /**
  * Created by xuzl on 16-2-19.
@@ -93,7 +94,7 @@ public class topic {
                            @CookieValue(value = "PasswdHash", defaultValue = "null") String Passwdhash) {
         User u = user.findUserByName(Name);
         if (u != null && u.getPasswdHash().equals(Passwdhash)) {
-            topic.insertTopic(u.getId(), title, category, tags, content, attachment.getOriginalFilename());
+            topic.insertTopic(u.getId(), title, category, tags, content, attachment.getOriginalFilename(), new Timestamp(System.currentTimeMillis()));
             if (category != null) {
                 long topicCounts = topic.findTopicCounts(category);
                 Category cate = categoryMapper.findCategoryByName(category);

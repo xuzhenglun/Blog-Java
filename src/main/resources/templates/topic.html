@@ -53,7 +53,7 @@
             <tr th:each="topic:${Topics}">
                 <th th:text="${topic.Id}"></th>
                 <th><a th:text="${topic.Title}" th:href="'/topic/view/'+${topic.Id}"/></th>
-                <th th:text="${#dates.format(topic.Updated, 'yyyy-MM-dd hh:mm')}"/>
+                <th th:text="${topic.Updated == null}?'-':${#dates.format(topic.Updated, 'yyyy-MM-dd hh:mm')}"/>
                 <th th:text="${topic.Views}"/>
                 <th th:text="${topic.ReplyCounts}"/>
                 <th th:text="${topic.LastReply == null}?'-':${#dates.format(topic.LastReply, 'yyyy-MM-dd hh:mm')}"/>

@@ -12,7 +12,6 @@ public class Comment extends User implements Serializable {
     public long Uid;
     public String Content;
     public Timestamp Created;
-    public Timestamp Updated;
 
     public String getContent() {
         return Content;
@@ -34,10 +33,6 @@ public class Comment extends User implements Serializable {
         return Uid;
     }
 
-    public Timestamp getUpdated() {
-        return Updated;
-    }
-
     public void setContent(String content) {
         Content = content;
     }
@@ -56,9 +51,5 @@ public class Comment extends User implements Serializable {
 
     public void setUid(long uid) {
         Uid = uid;
-    }
-
-    public void setUpdated(Timestamp updated) {
-        Updated = updated;
     }
 }

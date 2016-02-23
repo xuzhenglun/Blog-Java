@@ -19,14 +19,15 @@ public interface TopicMapper {
     @Select("SELECT * FROM Topic WHERE Title = #{Title}")
     Topic findTopicByTitle(@Param("Title") String title);
 
-    @Insert("INSERT INTO Topic (Uid,Title,Category,Tag,Content,Attachment) VALUE (#{Uid}," +
-            "#{Title},#{Category},#{Tag},#{Content},#{Attachment})")
+    @Insert("INSERT INTO Topic (Uid,Title,Category,Tag,Content,Attachment,Created) VALUE (#{Uid}," +
+            "#{Title},#{Category},#{Tag},#{Content},#{Attachment},#{Created})")
     void insertTopic(@Param("Uid") long Uid,
                      @Param("Title") String Title,
                      @Param("Category") String Category,
                      @Param("Tag") String Tag,
                      @Param("Content") String Content,
-                     @Param("Attachment") String Attachment);
+                     @Param("Attachment") String Attachment,
+                     @Param("Created") Timestamp Created);
 
     @Update("Update Topic SET Uid = #{Uid}," +
             "Title = #{Title}," +
